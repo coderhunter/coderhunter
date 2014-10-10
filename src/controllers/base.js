@@ -5,16 +5,40 @@
     .module('coderhunter')
     .controller('layout', ['$scope', layoutCtrler])
     .controller('base', [
-      '$scope', '$state', '$timeout', '$location',
+      '$scope', '$state', '$timeout', '$location', 'auth',
       baseCtrler
     ]);
   
-  function baseCtrler($scope, $state, $timeout, $location) {
+  function baseCtrler($scope, $state, $timeout, $location, auth) {
+    // Reset user
+    $scope.user = null;
+    $scope.isVisitor = true;
     // Inject locals to template
     $scope.location = $location;
     $scope.state = $state;
     $scope.copyrightYear = (new Date()).getFullYear();
-    
+    // Signin via GitHub
+    $scope.signin = signin;
+
+    /**
+    *
+    * Signin via GitHub based on Auth0
+    *
+    **/
+    function signin() {
+      auth.signin({
+        popup: true
+      }, function() {
+        console.log(auth.profile);
+        if (auth.profile) {
+          $scope.user = auth.profile;
+          $scope.isVisitor = false;
+        }
+      }, function(err) {
+        console.log("Error :(", err);
+      });
+    }
+
     /**
     *
     * Alert utils

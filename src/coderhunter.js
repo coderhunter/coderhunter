@@ -1,21 +1,27 @@
 ;(function(angular) {
   'use strict';
-  
+
   angular
     .module('coderhunter', [
+      'auth0',
       'avoscloud',
       'ui.router',
       'ui.bootstrap'
     ])
     .config([
+      'authProvider',
       'avoscloudProvider',
       '$stateProvider',
       '$urlRouterProvider',
       '$locationProvider',
+      '$httpProvider',
        config
-     ]);
+    ])
+    .run(function(auth) {
+      auth.hookEvents();
+    });
 
-  function config(avoscloudProvider, $stateProvider, $urlRouterProvider, $locationProvider) {
+  function config(authProvider, avoscloudProvider, $stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     var templatesPath = globalConfigs.templatesPath || 'templates';
     // AVOSCloud backend configs
     avoscloudProvider.config({
@@ -43,6 +49,15 @@
     // html5 mode should also be supported by server side
     if (globalConfigs.html5Mode)
       $locationProvider.html5Mode(true);
+
+    // GitHub Auth service based on Auth0
+    authProvider.init({
+      domain: globalConfigs.auth0.domain,
+      clientID: globalConfigs.auth0.clientID,
+      loginUrl: '#!/',
+      callbackUrl: location.href
+    });
+    $httpProvider.interceptors.push('authInterceptor');
 
     function defineRoutes(routes) {
       var routers = {};
