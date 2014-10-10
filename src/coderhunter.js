@@ -1,5 +1,6 @@
-(function(angular) {
-
+;(function(angular) {
+  'use strict';
+  
   angular
     .module('coderhunter', [
       'avoscloud',
@@ -11,8 +12,8 @@
       '$stateProvider',
       '$urlRouterProvider',
       '$locationProvider',
-       config]
-    );
+       config
+     ]);
 
   function config(avoscloudProvider, $stateProvider, $urlRouterProvider, $locationProvider) {
     var templatesPath = globalConfigs.templatesPath || 'templates';

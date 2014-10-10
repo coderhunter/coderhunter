@@ -3,7 +3,7 @@
 <head ng-controller="meta">
   <base href="/" />
   <meta charset="UTF-8">
-  <title>CoderHunter</title>
+  <title ng-bind="title"></title>
   <meta name="fragment" content="!" />
   <meta name="description" content="{{description}}">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -27,5 +27,10 @@
   <script src="configs.js"></script>
   <!-- the coderhunter app -->
   <script src="src/coderhunter.js"></script>
+  <script src="src/controllers/meta.js"></script>
+  <script src="src/controllers/base.js"></script>
+  <script src="src/controllers/archive.js"></script>
+  <script src="src/controllers/single.js"></script>
+  <script src="src/controllers/admin.js"></script>
 </body>
 </html>
