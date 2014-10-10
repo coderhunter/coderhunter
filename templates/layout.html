@@ -1,0 +1,30 @@
+<header ng-class="state.current.controller">
+  <nav>
+    <div class="options pull-right">
+      <a ui-sref="layout.create" class="avatar" ng-show="user" ng-cloak>
+        <img ng-src="{{user.avatar_url}}" alt="{{user.name}}" class="img-circle"/>
+      </a>
+      <a id="signin-btn" ng-show="isVisitor" ng-click="toggleSigninSection();" tooltip-placement="left" tooltip="通过社交网络登录" href="javascript:void(0);" ng-cloak>
+        <span class='fa fa-power-off'></span>
+      </a>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="logo">
+      <h1>
+        <a ui-sref="layout.home" ng-bind="configs.name"></a>
+        <span class="description" ng-bind="configs.description"></span>
+      </h1>
+    </div>
+  </div>
+</header>
+<section id="content" class="content">
+  <div ui-view>
+    <div class="loading container">loading...</div>
+  </div>
+</section>
+<footer>
+  <div class="container">
+    &copy; <span class="copyright-year" ng-bind="copyrightYear"></span> <a ng-href="{{configs.url}}"><span class="copyright-name" ng-bind="configs.name"></span></a>. Powered by <a href="http://github.com/duoshuo/airpub">Airpub</a>
+  </div>
+</footer>
