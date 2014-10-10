@@ -4,14 +4,14 @@
   angular
     .module('coderhunter')
     .controller('archive', [
-      '$scope', '$state', '$rootScope', 'avoscloud'
+      '$scope', '$state', '$rootScope', 'avoscloud',
       archiveCtrler
     ]);
 
   function archiveCtrler($scope, $state, $rootScope, avoscloud) {
     $scope.itemsPerPage = 10;
     $scope.currentPage = parseNumber($state.params.page) || 1;
-    $rootScope.$emit('updateMeta', $scope.configs.name);
+    // $rootScope.$emit('updateMeta', $scope.configs.name);
     console.log(avoscloud);
 
     // Read coders from cache

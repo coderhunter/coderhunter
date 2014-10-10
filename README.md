@@ -1,6 +1,6 @@
 ## CoderHunter
 
-a coder hunt service.
+从靠谱的圈子发现靠谱的人.
 
 ### MIT license
 Copyright (c) 2014 turing &lt;o.u.turing@gmail.com&gt;

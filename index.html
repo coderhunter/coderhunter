@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="coderhunter">
+<html ng-app="coderhunter" ng-controller="global">
 <head ng-controller="meta">
   <base href="/" />
   <meta charset="UTF-8">
@@ -13,8 +13,8 @@
   <link rel="stylesheet" href="css/coderhunter.min.css" />
   <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
   <!-- the coderhunter dependencies -->
-  <script src="bower_components/angular/angular.min.js"></script>
-  <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
   <script src="bower_components/angular-resource/angular-resource.min.js"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script> 
   <script src="bower_components/avoscloud/dist/avoscloud.min.js"></script>
@@ -27,6 +27,7 @@
   <script src="configs.js"></script>
   <!-- the coderhunter app -->
   <script src="src/coderhunter.js"></script>
+  <script src="src/controllers/global.js"></script>
   <script src="src/controllers/meta.js"></script>
   <script src="src/controllers/base.js"></script>
   <script src="src/controllers/archive.js"></script>

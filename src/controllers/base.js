@@ -19,9 +19,7 @@
     // alerts module
     $scope.alerts = [];
     $scope.addAlert = addAlert;
-    $scope.closeAlert = closeAlert;
-    // update header backgroud
-    $scope.updateBackground = updateBackground;
+    $scope.closeAlert = closeAlert;;
     // init copyright
     $scope.copyrightYear = (new Date()).getFullYear();
 
