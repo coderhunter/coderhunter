@@ -8,6 +8,8 @@
     "angular-ui-router": "~0.2.10",
     "angular-bootstrap": "~0.11.0",
     "nprogress": "~0.1.6",
-    "wechat.js": "~0.1.0"
+    "wechat.js": "~0.1.0",
+    "font-awesome": "~4.2.0",
+    "auth0-angular": "~2.2.10"
   }
 }

@@ -4,7 +4,7 @@
       <a ui-sref="layout.create" class="avatar" ng-show="user" ng-cloak>
         <img ng-src="{{user.avatar_url}}" alt="{{user.name}}" class="img-circle"/>
       </a>
-      <a id="signin-btn" ng-show="isVisitor" ng-click="toggleSigninSection();" tooltip-placement="left" tooltip="通过社交网络登录" href="javascript:void(0);" ng-cloak>
+      <a id="github-signin" ng-show="isVisitor" tooltip-placement="left" tooltip="通过 GitHub 登录" href="javascript:void(0);" ng-cloak>
         <span class='fa fa-power-off'></span>
       </a>
     </div>
