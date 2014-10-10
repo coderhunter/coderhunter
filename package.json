@@ -1,5 +1,6 @@
 {
   "name": "coderhunter",
+  "private": true,
   "version": "0.1.0",
   "description": "a coder hune service",
   "main": "index.js",
