@@ -1,28 +1,6 @@
-## coderhunter ![NPM version](https://img.shields.io/npm/v/coderhunter.svg?style=flat) 
+## CoderHunter
 
-a coder hune service
-
-### Installation
-```bash
-$ npm install coderhunter
-```
-
-### Example
-```js
-var coderhunter = require('coderhunter');
-```
-
-### API
-check this file: `index.js`
-
-### Contributing
-- Fork this repo
-- Clone your repo
-- Install dependencies
-- Checkout a feature branch
-- Feel free to add your features
-- Make sure your features are fully tested
-- Open a pull request, and enjoy <3
+a coder hunt service.
 
 ### MIT license
 Copyright (c) 2014 turing &lt;o.u.turing@gmail.com&gt;
