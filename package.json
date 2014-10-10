@@ -4,7 +4,12 @@
   "description": "a coder hune service",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "less": "node_modules/.bin/lessc -x less/coderhunter.less css/coderhunter.min.css",
+    "watch": "node_modules/.bin/rewatch less/*.less -c 'npm run less'",
+    "serve": "node_modules/.bin/serve --no-less .",
+    "build": "bin/build.sh",
+    "dev": "npm run serve & npm run watch",
+    "start": "npm run dev"
   },
   "repository": {
     "type": "git",
@@ -18,5 +23,11 @@
   "bugs": {
     "url": "https://github.com/coderhunter/coderhunter/issues"
   },
-  "homepage": "https://github.com/coderhunter/coderhunter"
+  "homepage": "https://github.com/coderhunter/coderhunter",
+  "devDependencies": {
+    "serve": "~1.4.0",
+    "uglify-js": "^2.4.15",
+    "rewatch": "~0.2.2",
+    "less": "~1.7.3"
+  }
 }
