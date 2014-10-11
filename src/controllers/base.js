@@ -2,41 +2,49 @@
   'use strict';
   
   angular
-    .module('coderhunter')
-    .controller('layout', ['$scope', layoutCtrler])
+    .module('coderhunter')    
     .controller('base', [
-      '$scope', '$state', '$timeout', '$location', 'auth',
+      '$scope', 
+      '$state', 
+      '$timeout', 
+      '$location', 
+      'auth',
       baseCtrler
-    ]);
+    ])
+    .controller('layout', ['$scope', layoutCtrler]);
   
   function baseCtrler($scope, $state, $timeout, $location, auth) {
     // Reset user
-    $scope.user = null;
-    $scope.isVisitor = true;
+    $scope.auth = auth;
+
     // Inject locals to template
-    $scope.location = $location;
     $scope.state = $state;
+    $scope.location = $location;
     $scope.copyrightYear = (new Date()).getFullYear();
+
     // Signin via GitHub
     $scope.signin = signin;
+    $scope.signout = signout;
 
-    /**
-    *
-    * Signin via GitHub based on Auth0
-    *
-    **/
+    // Signin via GitHub based on Auth0
     function signin() {
       auth.signin({
         popup: true
       }, function() {
-        console.log(auth.profile);
-        if (auth.profile) {
-          $scope.user = auth.profile;
-          $scope.isVisitor = false;
-        }
+        // signin successful
       }, function(err) {
-        console.log("Error :(", err);
+        // signin error
+        addAlert('登录出错，请稍后再试试...');
+        console.log(err);
       });
+    }
+
+    function signout() {
+      return auth.signout();
+    }
+
+    function createMember(profile) {
+      
     }
 
     /**

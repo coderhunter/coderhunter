@@ -1,22 +1,27 @@
 <header ng-class="state.current.controller">
   <div class="container">
+    <!-- main width: 8 Grid-->
     <div class="row">
-      <div class="col-lg-4 col-md-4">
-        <h1 class="logo">
-          <a ui-sref="layout.home" ng-bind="configs.name"></a>
-          <span class="description" ng-bind="configs.description"></span>
-        </h1>
-      </div>
-      <nav class="col-lg-8 col-md-8">
-        <div class="options pull-right clearfix">
-          <a id="github-signin" class="signin" ng-show="isVisitor" tooltip-placement="left" tooltip="通过 GitHub 登录" href="javascript:void(0);" ng-click="signin();" ng-cloak>
-            <span class='fa fa-github'></span>
-          </a>
-          <a ui-sref="layout.create" class="avatar" ng-show="user" tooltip-placement="left" tooltip="{{user.name}}" ng-cloak>
-            <img ng-src="{{user.picture}}" alt="{{user.name}}" class="img-circle"/>
-          </a>
+      <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2">
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <h1 class="logo">
+              <a ui-sref="layout.home" ng-bind="configs.name"></a>
+              <span class="description" ng-bind="configs.description"></span>
+            </h1>
+          </div>
+          <nav class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+            <div class="options pull-right clearfix">
+              <a id="github-signin" class="signin" ng-show="!auth.profile" tooltip-placement="left" tooltip="通过 GitHub 登录" href="javascript:void(0);" ng-click="signin();" ng-cloak>
+                <span class='fa fa-github'></span>
+              </a>
+              <a ui-sref="layout.create" class="avatar" ng-show="auth.profile" tooltip-placement="left" tooltip="{{auth.profile.name}}" ng-cloak>
+                <img ng-src="{{auth.profile.picture}}" alt="{{auth.profile.name}}" class="img-circle"/>
+              </a>
+            </div>
+          </nav>
         </div>
-      </nav>
+      </div>
     </div>
   </div>
 </header>
@@ -27,6 +32,11 @@
 </section>
 <footer>
   <div class="container">
-    &copy; <span class="copyright-year" ng-bind="copyrightYear"></span> <a ng-href="{{configs.uri}}"><span class="copyright-name" ng-bind="configs.name"></span></a>.
+    <!-- main width: 8 Grid-->
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2">
+        &copy; <span class="copyright-year" ng-bind="copyrightYear"></span> <a ng-href="{{configs.uri}}"><span class="copyright-name" ng-bind="configs.name"></span></a>.
+      </div>
+    </div>
   </div>
 </footer>

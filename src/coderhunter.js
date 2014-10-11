@@ -28,25 +28,26 @@
       'X-AVOSCloud-Application-Id': AVOSConfigs.appId,
       'X-AVOSCloud-Application-Key': AVOSConfigs.appKey
     });
-    // init router objects
+    console.log(avoscloudProvider);
+    // Init router objects
     var routers = defineRoutes(['archive', 'single', 'admin', '404', 'layout']);
-    // routes configs
+    // Routes configs
     $urlRouterProvider.otherwise("/404");
-    // signup routes uri
+    // Signup routes uri
     $stateProvider
       .state('layout',        routerMaker('', routers.layout))
       .state('layout.home',   routerMaker('/', routers.layout)) // alias router for layout
       .state('layout.pager',  routerMaker('/page/:page', routers.archive))
       .state('layout.single', routerMaker('/coder/:uri', routers.single))
-      .state('layout.create', routerMaker('/create', routers.admin, appendTitleToRouter('新建')))
-      .state('layout.update', routerMaker('/coder/:uri/update', routers.admin, appendTitleToRouter('更新')))
+      .state('layout.create', routerMaker('/create', routers.admin, appendToRouter('title','新建')))
+      .state('layout.update', routerMaker('/coder/:uri/update', routers.admin, appendToRouter('title','更新')))
       .state('layout.404',    routerMaker('/404', routers['404']));
 
-    // hashtag config
+    // Hashtag config
     $locationProvider
       .hashPrefix(globalConfigs.hashPrefix || '!');
 
-    // html5 mode should also be supported by server side
+    // Html5 mode should also be supported by server side
     if (globalConfigs.html5Mode)
       $locationProvider.html5Mode(true);
 
@@ -54,10 +55,12 @@
     authProvider.init({
       domain: globalConfigs.auth0.domain,
       clientID: globalConfigs.auth0.clientID,
-      loginUrl: '#!/',
+      loginState: 'signin',
       callbackUrl: location.href
     });
-    $httpProvider.interceptors.push('authInterceptor');
+    
+    // This will disable avoscloud communcation
+    // $httpProvider.interceptors.push('authInterceptor');
 
     function defineRoutes(routes) {
       var routers = {};
@@ -87,12 +90,16 @@
       return obj;
     }
 
-    function appendTitleToRouter(title) {
+    function appendDataToRouter(data) {
       return {
-        data: {
-          title: title
-        }
+        data: data
       }
+    }
+
+    function appendToRouter(type, object) {
+      var data = {};
+      data[type] = object;
+      return appendDataToRouter(data);
     }
   }
 
