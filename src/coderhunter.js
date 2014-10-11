@@ -28,7 +28,6 @@
       'X-AVOSCloud-Application-Id': AVOSConfigs.appId,
       'X-AVOSCloud-Application-Key': AVOSConfigs.appKey
     });
-    console.log(avoscloudProvider);
     // Init router objects
     var routers = defineRoutes(['archive', 'single', 'admin', '404', 'layout']);
     // Routes configs
@@ -58,7 +57,7 @@
       loginState: 'signin',
       callbackUrl: location.href
     });
-    
+
     // This will disable avoscloud communcation
     // $httpProvider.interceptors.push('authInterceptor');
 

@@ -9,11 +9,12 @@
       '$timeout', 
       '$location', 
       'auth',
+      'avoscloud',
       baseCtrler
     ])
     .controller('layout', ['$scope', layoutCtrler]);
   
-  function baseCtrler($scope, $state, $timeout, $location, auth) {
+  function baseCtrler($scope, $state, $timeout, $location, auth, avoscloud) {
     // Reset user
     $scope.auth = auth;
 
@@ -26,12 +27,18 @@
     $scope.signin = signin;
     $scope.signout = signout;
 
+    checkMemeber('github|1269537');
+
     // Signin via GitHub based on Auth0
     function signin() {
       auth.signin({
         popup: true
       }, function() {
-        // signin successful
+        // Check if user exsit in AVOSCloud Database
+        checkMemeber(auth.profile.user_id, function(exist){
+          if (exist) return;
+          createMember(auth.profile);
+        })
       }, function(err) {
         // signin error
         addAlert('登录出错，请稍后再试试...');
@@ -41,6 +48,17 @@
 
     function signout() {
       return auth.signout();
+    }
+
+    function checkMemeber(user_id) {
+      if (!user_id) return;
+      avoscloud.users.get({
+        where: JSON.stringify({user_id: user_id})
+      }, function(data){
+        console.log(data);
+      }, function(err){
+        console.log(err);
+      });
     }
 
     function createMember(profile) {
