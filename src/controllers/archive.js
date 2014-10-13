@@ -8,53 +8,76 @@
       '$state', 
       '$rootScope', 
       'avoscloud',
+      'auth',
       archiveCtrler
     ]);
 
-  function archiveCtrler($scope, $state, $rootScope, avoscloud) {
-    $scope.itemsPerPage = 10;
-    $scope.currentPage = parseNumber($state.params.page) || 1;
-    // $rootScope.$emit('updateMeta', $scope.configs.name);
-
+  function archiveCtrler($scope, $state, $rootScope, avoscloud, auth) {
     // Read coders from cache
     if ($scope.coders && $scope.coders.length > 0) return;
-    
-    // TODO: remove this ugly hack
-    if ($state.params.page) {
-      var lock = true;
-      var currentPage = $scope.currentPage;
+
+    // Start fetching coders
+    fetchCoders();
+
+    /**
+    *
+    * Upvote utils
+    *
+    **/
+    $scope.upvote = upvote;
+
+    function upvote(objectId, index) {
+      if (!auth.isAuthenticated)
+        return $state.go('layout.signin');
+      if ($scope.coders[index].voted)
+        return false;
+
+      avoscloud.classes.put({
+        className: 'coder',
+        objectId: objectId
+      }, {
+        upvote: {
+          __op: 'Increment',
+          amount: 1
+        }
+      }, function(result) {
+        $scope.coders[index].voted = true;
+        $scope.coders[index].upvote += 1;
+      }, function(err) {
+        console.log(err);
+        alert(err);
+      });
     }
 
     // Read fresh data from AVOSCloud
     // Fetch today's coders
-    avoscloud.classes.get({
-      className: 'coder'
-    }, function(data) {
-      if ($state.params.page)
-        lock = false;
-      $scope.coders = data.results;
-      if ($state.params.page) 
-        $scope.currentPage = currentPage;
-      return;
-    }, function(err){
-      // Class not found.
-      if (err.status && err.status === 404)
-        $state.go('layout.404');
-    });
-
-    // When page changed, go => /#/page/currentPage
-    // Why the fucking event was trigged twice and return `1` the second time ?!
-    $scope.pageChanged = function() {
-      if (lock) return;
-      $state.go('layout.pager', {
-        page: $scope.currentPage
+    function fetchCoders() {
+      var now = new Date();
+      now.setDate(now.getDate() - 1);
+      avoscloud.classes.get({
+        className: 'coder',
+        order: '-upvote,updatedAt,createdAt',
+        limit: 20,
+        where: JSON.stringify({
+          createdAt: {
+            $gte: {
+              "__type": "Date",
+              "iso": now.toISOString()
+            }
+          }
+        })
+      }, function(data) {
+        if ($state.params.page)
+          lock = false;
+        $scope.coders = data.results;
+        if ($state.params.page) 
+          $scope.currentPage = currentPage;
+        return;
+      }, function(err){
+        // Class not found.
+        if (err.status && err.status === 404)
+          $state.go('layout.404');
       });
-    };
-
-    function parseNumber(str) {
-      if (str && !isNaN(parseInt(str)))
-        return parseInt(str);
-      return false;
     }
   }
 })(window.angular);

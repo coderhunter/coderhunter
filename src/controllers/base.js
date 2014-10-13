@@ -53,24 +53,6 @@
 
     /**
     *
-    * Upvote utils
-    *
-    **/
-    $scope.upvote = upvote;
-
-    function upvote(objectId) {
-      if (!auth.isAuthenticated)
-        return $state.go('layout.signin');
-      avoscloud.classes.post({
-        className: 'coder',
-        objectId: objectId
-      }, {
-        upvote: ''
-      });
-    }
-
-    /**
-    *
     * Alert utils
     * @example
     *   addAlert();

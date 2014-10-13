@@ -9,17 +9,17 @@
         <div class="coder clearfix" ng-repeat="coder in coders">
           <div class="row">
             <div class="col-lg-1 col-md-1">
-              <a class="upvote" href="javascript:void(0);" ng-click="upvote(coder.objectId);">
+              <a class="upvote" href="javascript:void(0);" ng-click="upvote(coder.objectId, $index);" ng-class="{'voted': coder.voted}">
                 <i class="fa fa-arrow-up"></i>
-                <span class="upvote-num" ng-bind="coder.upvoted"></span>
               </a>
             </div>
             <div class="col-lg-11 col-md-11">
               <div class="coder-entry clearfix">
                 <h3><a ng-href="{{coder.uri}}" ng-bind="coder.name"></a></h3>
                 <div class="meta">
+                  <span class="upvote-num" ng-bind="(coder.upvote || 1) + ' 位推荐'"></span>
+                  <a ui-sref="layout.single({uri: coder.objectId})">添加评论</a>
                   <span class="created-at" ng-bind="coder.createdAt | date: 'hh:mm a'"></span>
-                  <a ui-sref="layout.single({uri: coder.objectId})">Comments</a>
                 </div>
               </div>
             </div>
