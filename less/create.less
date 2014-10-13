@@ -1,16 +1,25 @@
 .create {
-  .title {
-    font-size: 22px;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-  }
-  form {
+  .createForm {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    label {
+      font-size: 16px;
+      font-weight: normal;
+      display: block;
+      span {
+        float: right;
+        font-size: 14px;
+        color: #444;
+      }
+    }
     input {
       box-shadow: none;
       &:focus {
         box-shadow: none;
       }
+    }
+    button {
+      font-weight: bold;
     }
   }
 }

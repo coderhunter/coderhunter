@@ -5,18 +5,34 @@
       <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2">
         <!-- entry grid -->
         <div class="row">
-          <div class="create col-lg-12">
-            <h3 class="title">Add Coder</h3>
-            <form ng-submit="create();">
+          <div class="create col-lg-7">
+            <h3 class="devider-title">推荐 Coder</h3>
+            <form ng-submit="create();" class="createForm" name="createForm">
               <div class="form-group">
-                <label for="coderName">Coder's Name</label>
+                <label for="coderName">如何称呼？
+                  <span>昵称、GitHub ID、真实姓名</span>
+                </label>
                 <input type="text" class="form-control" ng-model="coder.name" id="coderName">
               </div>
               <div class="form-group">
-                <label for="coderUri">URI</label>
-                <input type="text" class="form-control" ng-model="coder.uri" id="coderUri">
+                <label for="coderUri">链接地址
+                  <span>GitHub Profile、Twitter、新浪微博</span>
+                </label>
+                <input type="text" class="form-control" ng-model="coder.uri" id="coderUri" placeholder="http://">
               </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <div class="form-group">
+                <label for="coderUri">标签
+                  <span>请尽量填意义明确的标签</span>
+                </label>
+                <input type="text" class="form-control" ng-model="coder.tag" id="coderUri" placeholder="Node.js、Java、Python、Ruby、PHP 等">
+              </div>
+              <div class="form-group">
+                <label for="coderUri">期望薪酬范围
+                  <span>薪资范围是双向的过滤条件</span>
+                </label>
+                <input type="text" class="form-control" ng-model="coder.salary" id="coderUri" placeholder="10k-15k">
+              </div>
+              <button type="submit" class="btn btn-primary">确认推荐</button>
             </form>
           </div>
         </div>
