@@ -29,7 +29,9 @@
       'X-AVOSCloud-Application-Key': AVOSConfigs.appKey
     });
     // Init router objects
-    var routers = defineRoutes(['archive', 'single', 'admin', '404', 'layout']);
+    var routers = defineRoutes([
+      'archive', 'single', 'admin', '404', 'layout', 'member'
+    ]);
     // Routes configs
     $urlRouterProvider.otherwise("/404");
     // Signup routes uri
@@ -37,9 +39,9 @@
       .state('layout',        routerMaker('', routers.layout))
       .state('layout.home',   routerMaker('/', routers.layout)) // alias router for layout
       .state('layout.pager',  routerMaker('/page/:page', routers.archive))
+      .state('layout.member', routerMaker('/member/:uri', routers.member))
       .state('layout.single', routerMaker('/coder/:uri', routers.single))
       .state('layout.create', routerMaker('/create', routers.admin, appendToRouter('title','新建')))
-      .state('layout.update', routerMaker('/coder/:uri/update', routers.admin, appendToRouter('title','更新')))
       .state('layout.404',    routerMaker('/404', routers['404']));
 
     // Hashtag config

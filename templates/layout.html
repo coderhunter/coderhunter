@@ -15,9 +15,8 @@
               <a id="github-signin" class="signin" ng-show="!auth.profile" tooltip-placement="left" tooltip="通过 GitHub 登录" href="javascript:void(0);" ng-click="signin();" ng-cloak>
                 <span class='fa fa-github'></span>
               </a>
-              <a ui-sref="layout.create" class="avatar" ng-show="auth.profile" tooltip-placement="left" tooltip="{{auth.profile.name}}" ng-cloak>
+              <a ui-sref="layout.member" class="avatar" ng-show="auth.profile" tooltip-placement="left" tooltip="{{auth.profile.name}}" ng-cloak>
                 <img ng-src="{{auth.profile.picture}}" alt="{{auth.profile.name}}" class="img-circle"/>
-                <span ng-click="signout();">登出</span>
               </a>
             </div>
           </nav>

@@ -36,7 +36,6 @@
         password: fetchGithubToken(profile)
       }, function(user){
         if (!user) return;
-        console.log(user);
         if (user.sessionToken)
           avoscloud.headers('sid', user.sessionToken)
       }, function(err) {
