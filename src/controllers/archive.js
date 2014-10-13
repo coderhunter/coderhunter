@@ -13,6 +13,8 @@
     ]);
 
   function archiveCtrler($scope, $state, $rootScope, avoscloud, auth) {
+    $scope.fetchMore = fetchMore;
+
     // Read coders from cache
     if ($scope.coders && $scope.coders.length > 0) return;
 
@@ -58,6 +60,7 @@
         className: 'coder',
         order: '-upvote,updatedAt,createdAt',
         limit: 20,
+        include: 'author',
         where: JSON.stringify({
           createdAt: {
             $gte: {
@@ -78,6 +81,10 @@
         if (err.status && err.status === 404)
           $state.go('layout.404');
       });
+    }
+
+    function fetchMore() {
+
     }
   }
 })(window.angular);

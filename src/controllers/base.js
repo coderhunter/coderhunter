@@ -36,7 +36,7 @@
         if (user.sessionToken)
           avoscloud.headers('sid', user.sessionToken)
       }, function(err) {
-        // AVOSCloud signin fail
+        // Signin via AVOSCloud fails
         console.log(err);
       });
     });
