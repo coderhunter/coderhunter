@@ -9,7 +9,7 @@
         <div class="coder clearfix" ng-repeat="coder in coders">
           <div class="row">
             <div class="col-lg-1 col-md-1">
-              <a class="upvote" href="javascript:void(0);" ng-click="upvote(coder.objectId, $index);" ng-class="{'voted': coder.voted}">
+              <a class="upvote" href="javascript:void(0);" ng-click="upvote(coder.objectId, $index);" ng-class="{'voted': coder.voted || isVotedByObjectId(coder)}">
                 <i class="fa fa-arrow-up"></i>
               </a>
             </div>
@@ -21,6 +21,9 @@
                   <a ui-sref="layout.single({uri: coder.objectId})">添加评论</a>
                   <span class="created-at" ng-bind="coder.createdAt | date: 'hh:mm a'"></span>
                 </div>
+                <a ui-sref="layout.member({uri: coder.author.objectId})" class="coder-author pull-right" ng-show="coder.author" tooltip-placement="left" tooltip="由 {{coder.author.name}} 推荐">
+                  <img ng-src="{{coder.author.profile.picture}}" alt="" class="avatar">
+                </a>
               </div>
             </div>
           </div>

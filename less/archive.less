@@ -44,10 +44,24 @@
     }
   }
   .coder-entry {
+    position: relative;
     h3 {
       font-size: 16px;
       margin-top: 5px;
       margin-bottom: 5px;
+    }
+    .coder-author {
+      position: absolute;
+      right: 0px;
+      top: 5px;
+      z-index: 99;
+      display: block;
+      .avatar {
+        display: block;
+        width: 35px;
+        height: 35px;
+        border-radius: 5px;
+      }
     }
   }
 }

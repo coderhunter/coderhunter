@@ -27,13 +27,14 @@
     *
     **/
     $scope.upvote = upvote;
+    $scope.isVotedByObjectId = isVotedByObjectId;
 
     function upvote(objectId, index) {
       if (!auth.isAuthenticated || !auth.objectId)
         return $state.go('layout.signin');
       if ($scope.coders[index].voted)
         return false;
-      if (isVotedByObjectId($scope.coders[index], auth.objectId))
+      if (isVotedByObjectId($scope.coders[index]))
         return false;
 
       avoscloud.classes.put({
@@ -80,12 +81,7 @@
           }
         })
       }, function(data) {
-        if ($state.params.page)
-          lock = false;
         $scope.coders = data.results;
-        if ($state.params.page) 
-          $scope.currentPage = currentPage;
-        return;
       }, function(err){
         // Class not found.
         if (err.status && err.status === 404)
@@ -97,10 +93,12 @@
 
     }
 
-    function isVotedByObjectId(coder, userObjectId) {
+    function isVotedByObjectId(coder) {
       var status = false;
+      if (!auth.objectId)
+        return true;
       angular.forEach(coder.upvotedBy, function(voter){
-        if (voter.objectId === userObjectId)
+        if (voter.objectId === auth.objectId)
           status = true;
       });
       return status;
