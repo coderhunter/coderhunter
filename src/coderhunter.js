@@ -54,7 +54,7 @@
     authProvider.init({
       domain: globalConfigs.auth0.domain,
       clientID: globalConfigs.auth0.clientID,
-      loginState: 'signin',
+      loginState: 'layout.signin',
       callbackUrl: location.href
     });
 

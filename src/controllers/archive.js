@@ -32,11 +32,12 @@
     }, function(data) {
       if ($state.params.page)
         lock = false;
-      console.log(data);
-      $scope.coders = data;
-      if ($state.params.page) $scope.currentPage = currentPage;
+      $scope.coders = data.results;
+      if ($state.params.page) 
+        $scope.currentPage = currentPage;
       return;
     }, function(err){
+      // Class not found.
       if (err.status && err.status === 404)
         $state.go('layout.404');
     });
