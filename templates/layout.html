@@ -13,11 +13,14 @@
           </div>
           <nav class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
             <div class="options pull-right clearfix">
-              <a id="github-signin" class="signin" ng-show="!auth.profile" tooltip-placement="left" tooltip="通过 GitHub 登录" href="javascript:void(0);" ng-click="signin();" ng-cloak>
-                <span class='fa fa-github'></span>
+              <a ui-sref="layout.member" class="avatar clearfix" ng-cloak>
+                <img ng-src="{{auth.profile.picture}}" alt="{{auth.profile.name}}" ng-show="auth.profile" tooltip-placement="left" tooltip="{{auth.profile.name}}" />
+                <span ng-hide="auth.profile" class="loading-icon">
+                  <i class="fa fa-circle-o-notch fa-spin"></i>  
+                </span>
               </a>
-              <a ui-sref="layout.member" class="avatar" ng-show="auth.profile" tooltip-placement="left" tooltip="{{auth.profile.name}}" ng-cloak>
-                <img ng-src="{{auth.profile.picture}}" alt="{{auth.profile.name}}" class="img-circle"/>
+              <a ui-sref="layout.create">
+                <i class="fa fa-plus-square-o"></i>
               </a>
             </div>
           </nav>

@@ -6,7 +6,9 @@
         <!-- entry grid -->
         <div class="row">
           <div class="signin col-lg-12">
-            
+            <a id="github-signin" class="signin" ng-show="!auth.profile" tooltip-placement="left" tooltip="通过 GitHub 登录" href="javascript:void(0);" ng-click="signin();" ng-cloak>
+                <span class='fa fa-github'></span>
+              </a>
           </div>
         </div>
       </div>

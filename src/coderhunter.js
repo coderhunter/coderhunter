@@ -30,18 +30,19 @@
     });
     // Init router objects
     var routers = defineRoutes([
-      'archive', 'single', 'admin', '404', 'layout', 'member'
+      'archive', 'single', 'create', '404', 'layout', 'member', 'signin'
     ]);
     // Routes configs
     $urlRouterProvider.otherwise("/404");
     // Signup routes uri
     $stateProvider
       .state('layout',        routerMaker('', routers.layout))
-      .state('layout.home',   routerMaker('/', routers.layout)) // alias router for layout
+      .state('layout.home',   routerMaker('/', routers.layout)) // alias router
+      .state('layout.signin', routerMaker('/', routers.signin))
       .state('layout.pager',  routerMaker('/page/:page', routers.archive))
       .state('layout.member', routerMaker('/member/:uri', routers.member))
       .state('layout.single', routerMaker('/coder/:uri', routers.single))
-      .state('layout.create', routerMaker('/create', routers.admin, appendToRouter('title','新建')))
+      .state('layout.create', routerMaker('/create', routers.create))
       .state('layout.404',    routerMaker('/404', routers['404']));
 
     // Hashtag config
