@@ -13,7 +13,7 @@
           </div>
           <nav class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
             <div class="options pull-right clearfix">
-              <a ui-sref="layout.member" class="avatar clearfix" ng-cloak>
+              <a ui-sref="layout.member" ng-show="auth.profile" class="avatar clearfix">
                 <img ng-src="{{auth.profile.picture}}" alt="{{auth.profile.name}}" ng-show="auth.profile" tooltip-placement="left" tooltip="{{auth.profile.name}}" />
                 <span ng-hide="auth.profile" class="loading-icon">
                   <i class="fa fa-circle-o-notch fa-spin"></i>  

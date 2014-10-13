@@ -17,6 +17,7 @@
   function baseCtrler($scope, $state, $timeout, $location, auth, avoscloud) {
     // Reset user
     $scope.auth = auth;
+    console.log(auth)
 
     // Inject locals to template
     $scope.state = $state;

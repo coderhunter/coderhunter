@@ -4,19 +4,30 @@
   angular
     .module('coderhunter')
     .controller('single', [
-      '$scope', '$state', 'avoscloud', '$rootScope', 
-      singleArticleCtrler
+      '$scope', 
+      '$state', 
+      'avoscloud', 
+      '$rootScope', 
+      singleCoderCtrler
     ]);
 
-  function singleArticleCtrler($scope, $state, avoscloud, $rootScope) {
+  function singleCoderCtrler($scope, $state, avoscloud, $rootScope) {
     var uri = $state.params.uri;
     if (!uri) return $state.go('layout.404');
-    $scope.articleID = uri;
 
     // Read coder from cache
     if ($scope.coder) return;
     
     // Fetch coder details
+    avoscloud.classes.get({
+      className: 'coder',
+      objectId: uri
+    }, function(result) {
+      console.log(result);
+    }, function(err){
+      // when err;
+      console.log(err);
+    });
     // $duoshuo.get('threads/details', {
     //   thread_id: uri
     // }, function(err, result) {

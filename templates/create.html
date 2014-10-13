@@ -1,12 +1,23 @@
 <!-- main width: 8 Grid-->
 <div class="container">
-  <div id="admin" class="admin-page">
+  <div id="create" class="create-page">
     <div class="row">
       <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2">
         <!-- entry grid -->
         <div class="row">
-          <div class="admin col-lg-12">
-            <h3></h3>
+          <div class="create col-lg-12">
+            <h3 class="title">Add Coder</h3>
+            <form ng-submit="create();">
+              <div class="form-group">
+                <label for="coderName">Coder's Name</label>
+                <input type="text" class="form-control" ng-model="coder.name" id="coderName">
+              </div>
+              <div class="form-group">
+                <label for="coderUri">URI</label>
+                <input type="text" class="form-control" ng-model="coder.uri" id="coderUri">
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
           </div>
         </div>
       </div>
