@@ -66,7 +66,8 @@
 
     // Signout via auth0
     function signout() {
-      return auth.signout();
+      auth.signout();
+      return $state.go('layout.home');
     }
 
     // Check a member if exist in AVOSCloud database.
