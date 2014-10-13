@@ -17,6 +17,7 @@
         return $scope.addAlert('请填写有效字段...');
       if (!auth.profile || !auth.objectId)
         return $state.go('layout.signin');
+
       var newbie = new avoscloud.classes();
       newbie.name = $scope.coder.name;
       newbie.uri = $scope.coder.uri;
@@ -25,6 +26,7 @@
         className: "_User",
         objectId: auth.objectId
       };
+      newbie.upvotedBy = newbie.author;
       newbie.$save({
         className: 'coder'
       }, function(result){

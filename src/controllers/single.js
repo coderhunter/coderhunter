@@ -24,7 +24,7 @@
       objectId: uri
     }, function(result) {
       $scope.coder = result;
-    }, function(err){
+    }, function(err) {
       console.log(err);
     });
   }

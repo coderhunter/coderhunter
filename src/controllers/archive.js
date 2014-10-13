@@ -29,9 +29,11 @@
     $scope.upvote = upvote;
 
     function upvote(objectId, index) {
-      if (!auth.isAuthenticated)
+      if (!auth.isAuthenticated || !auth.objectId)
         return $state.go('layout.signin');
       if ($scope.coders[index].voted)
+        return false;
+      if (isVotedByObjectId($scope.coders[index], auth.objectId))
         return false;
 
       avoscloud.classes.put({
@@ -41,6 +43,14 @@
         upvote: {
           __op: 'Increment',
           amount: 1
+        },
+        upvotedBy: {
+          __op: 'AddUnique',
+          objects: [{
+            __type: "Pointer",
+            className: "_User",
+            objectId: auth.objectId
+          }]
         }
       }, function(result) {
         $scope.coders[index].voted = true;
@@ -85,6 +95,15 @@
 
     function fetchMore() {
 
+    }
+
+    function isVotedByObjectId(coder, userObjectId) {
+      var status = false;
+      angular.forEach(coder.upvotedBy, function(voter){
+        if (voter.objectId === userObjectId)
+          status = true;
+      });
+      return status;
     }
   }
 })(window.angular);

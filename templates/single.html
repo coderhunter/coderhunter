@@ -1,57 +1,30 @@
-<div id="coder" class="single clearfix">
-  <div class="coder">    
-    <!-- title section -->
-    <section class="title-section">
-      <div class="container">
+<!-- main width: 8 Grid-->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2">
+
+      <h2 class="devider-title" ng-bind="coder.name"></h2>
+
+      <div id="coder" class="coder clearfix">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2">
-            <h2 class="title">
-              <span class="title-entry" ng-bind="coder.name"></span>
-            </h2>
+          <div class="col-lg-1 col-md-1">
+            <a class="upvote" href="javascript:void(0);" ng-click="upvote(coder.objectId, $index);" ng-class="{'voted': coder.voted}">
+              <i class="fa fa-arrow-up"></i>
+            </a>
           </div>
-        </div>
-      </div>
-    </section>
-    <section class="meta-section">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 col-lg-offset-2">
-            <span class="pubdate" ng-bind="coder.created_at | date: 'yyyy/MM/dd h:mm a'"></span>
-            <span class="options" ng-show="coder.title && (user.user_id === author.user_id)" ng-cloak>
-              <a class="edit option" ui-sref="layout.update({uri: coder.id})">编辑</a>
-            </span>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- author section -->
-    <section class="author-section" ng-show="author" ng-cloak>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 clearfix">
-            <div class="row">
-              <a ng-href="{{author.url}}" class="author-avatar col-lg-2">
-                <img ng-src="{{author.avatar_url}}" class="img-circle mini-avatar" alt="{{author.name}}">
-              </a>
-              <!-- author meta -->
-              <div class="author-meta col-lg-10">
-                <p class="author-name" ng-bind="author.name"></p>
-                <p class="author-description" ng-bind="author.description"></p>
+          <div class="col-lg-11 col-md-11">
+            <div class="coder-entry clearfix">
+              <h3><a ng-href="{{coder.uri}}" ng-bind="coder.name"></a></h3>
+              <div class="meta">
+                <span class="upvote-num" ng-bind="(coder.upvote || 1) + ' 位推荐'"></span>
+                <a ui-sref="layout.single({uri: coder.objectId})">添加评论</a>
+                <span class="created-at" ng-bind="coder.createdAt | date: 'hh:mm a'"></span>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
-    <!-- comments section -->
-    <section id="comments" class="comments-section" ng-show="coder.title" ng-cloak>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 col-lg-offset-2 clearfix">
-            <div duoshuo data-thread-id="{{articleID}}"></div>
-          </div>
-        </div>
-      </div>
-    </section>
+
+    </div>
   </div>
 </div>
