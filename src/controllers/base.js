@@ -17,16 +17,11 @@
   function baseCtrler($scope, $state, $timeout, $location, auth, avoscloud) {
     // Reset user
     $scope.auth = auth;
-    console.log(auth)
 
     // Inject locals to template
     $scope.state = $state;
     $scope.location = $location;
     $scope.copyrightYear = (new Date()).getFullYear();
-
-    // Signin and Signout
-    $scope.signin = signin;
-    $scope.signout = signout;
 
     // Signin to AVOSCloud and get session token.
     $scope.$watch('auth.profile', function(){
@@ -35,8 +30,9 @@
       avoscloud.signin.post({
         username: profile.user_id,
         password: fetchGithubToken(profile)
-      }, function(user){
+      }, function(user) {
         if (!user) return;
+        $scope.auth.objectId = user.objectId;
         if (user.sessionToken)
           avoscloud.headers('sid', user.sessionToken)
       }, function(err) {
@@ -44,74 +40,6 @@
         console.log(err);
       });
     });
-
-    // Signin via Auth0
-    function signin() {
-      auth.signin({
-        popup: true
-      }, function() {
-        // Check if user exsit in AVOSCloud Database
-        checkMemeber(auth.profile.user_id, function(err, exist){
-          if (err)
-            return addAlert('登录出错，请稍后再试试');
-          if (exist) 
-            return false;
-          createMember(auth.profile);
-        })
-      }, function(err) {
-        // signin error
-        addAlert('登录出错，请稍后再试试...');
-        console.log(err);
-      });
-    }
-
-    // Signout via auth0
-    function signout() {
-      auth.signout();
-      return $state.go('layout.home');
-    }
-
-    // Check a member if exist in AVOSCloud database.
-    function checkMemeber(user_id, callback) {
-      if (!user_id) return;
-      if (!callback) return;
-
-      avoscloud.users.get({
-        where: JSON.stringify({user_id: user_id}) // This is ugly
-      }, function(data){
-        var user = data.results;
-        if (user.length > 0)
-          return callback(null, true);
-
-        return callback(null, false);
-      }, function(err) {
-        return callback(err);
-      });
-    }
-
-    // Create a member if NOT in AVOSCloud database.
-    function createMember(profile) {      
-      var toplevelKeys = ['name', 'nickname', 'email', 'followers', 'following', 'company', 'hireable', 'location', 'public_repos', 'html_url'];
-
-      var newbie = new avoscloud.users();
-      newbie.username = profile.user_id;
-      newbie.profile = profile;
-
-      if (hasGitHubToken(profile))
-        newbie.password = fetchGithubToken(profile);
-
-      angular.forEach(toplevelKeys, function(item){
-        if (!profile[item]) return;
-        newbie[item] = profile[item];
-      });
-
-      newbie.$save(function(err){
-        if (err)
-          return addAlert(err);
-        if (newbie.sessionToken)
-          avoscloud.headers('sid', newbie.sessionToken);
-      });
-    }
 
     function hasGitHubToken(profile) {
       return profile.identities && profile.identities[0] && profile.identities[0].provider === 'github';
@@ -121,6 +49,24 @@
       if (!hasGitHubToken(profile))
         return null;
       return profile.identities[0].access_token;
+    }
+
+    /**
+    *
+    * Upvote utils
+    *
+    **/
+    $scope.upvote = upvote;
+
+    function upvote(objectId) {
+      if (!auth.isAuthenticated)
+        return $state.go('layout.signin');
+      avoscloud.classes.post({
+        className: 'coder',
+        objectId: objectId
+      }, {
+        upvote: ''
+      });
     }
 
     /**

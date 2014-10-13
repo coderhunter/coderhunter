@@ -3,13 +3,13 @@
   <div class="row">
     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2">
 
-      <h2 class="devider-title">Top 20 Coders Today</h2>
+      <h2 class="devider-title">每日 Top 20 Coder</h2>
 
       <div id="coders" class="coders clearfix">
         <div class="coder clearfix" ng-repeat="coder in coders">
           <div class="row">
             <div class="col-lg-1 col-md-1">
-              <a class="upvote" href="javascript:void(0);" ng-click="upvote();">
+              <a class="upvote" href="javascript:void(0);" ng-click="upvote(coder.objectId);">
                 <i class="fa fa-arrow-up"></i>
                 <span class="upvote-num" ng-bind="coder.upvoted"></span>
               </a>
@@ -26,7 +26,7 @@
           </div>
         </div>
         <a id="more" class="more" href="javascript:void(0);" ng-click="more();" ng-show="coders.length > 0" ng-cloak>
-          More...
+          加载更多...
         </a>
       </div>
 

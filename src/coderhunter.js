@@ -38,11 +38,11 @@
     $stateProvider
       .state('layout',        routerMaker('', routers.layout))
       .state('layout.home',   routerMaker('/', routers.layout)) // alias router
-      .state('layout.signin', routerMaker('/', routers.signin))
+      .state('layout.signin', routerMaker('/signin', routers.signin))
       .state('layout.pager',  routerMaker('/page/:page', routers.archive))
       .state('layout.member', routerMaker('/member/:uri', routers.member))
       .state('layout.single', routerMaker('/coder/:uri', routers.single))
-      .state('layout.create', routerMaker('/create', routers.create))
+      .state('layout.create', routerMaker('/create', routers.create, appendToRouter('requiresLogin', true)))
       .state('layout.404',    routerMaker('/404', routers['404']));
 
     // Hashtag config
